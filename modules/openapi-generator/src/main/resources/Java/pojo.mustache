@@ -96,8 +96,12 @@ public class {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{{#parcela
 
   {{^isReadOnly}}
   public {{classname}} {{name}}({{{datatypeWithEnum}}} {{name}}) {
-    {{#vendorExtensions.isJacksonOptionalNullable}}this.{{name}} = JsonNullable.<{{{datatypeWithEnum}}}>of({{name}});{{/vendorExtensions.isJacksonOptionalNullable}}
-    {{^vendorExtensions.isJacksonOptionalNullable}}this.{{name}} = {{name}};{{/vendorExtensions.isJacksonOptionalNullable}}
+    {{#vendorExtensions.isJacksonOptionalNullable}}
+    this.{{name}} = JsonNullable.<{{{datatypeWithEnum}}}>of({{name}});
+    {{/vendorExtensions.isJacksonOptionalNullable}}
+    {{^vendorExtensions.isJacksonOptionalNullable}}
+    this.{{name}} = {{name}};
+    {{/vendorExtensions.isJacksonOptionalNullable}}
     return this;
   }
   {{#isListContainer}}
@@ -175,7 +179,11 @@ public class {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{{#parcela
   {{!unannotated, Jackson would pick this up automatically and add it *in addition* to the _JsonNullable getter field}}
   @JsonIgnore
 {{/vendorExtensions.isJacksonOptionalNullable}}
-{{^vendorExtensions.isJacksonOptionalNullable}}{{#jackson}}{{> jackson_annotations}}{{/jackson}}{{/vendorExtensions.isJacksonOptionalNullable}}
+{{^vendorExtensions.isJacksonOptionalNullable}}
+    {{#jackson}}
+        {{> jackson_annotations}}
+    {{/jackson}}
+{{/vendorExtensions.isJacksonOptionalNullable}}
   public {{{datatypeWithEnum}}} {{getter}}() {
     {{#vendorExtensions.isJacksonOptionalNullable}}
     {{#isReadOnly}}{{! A readonly attribute doesn't have setter => jackson will set null directly if explicitly returned by API, so make sure we have an empty JsonNullable}}
