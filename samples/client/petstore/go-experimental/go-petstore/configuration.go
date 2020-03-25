@@ -39,6 +39,9 @@ var (
 	// ContextAPIKeys takes a string apikey as authentication for the request
 	ContextAPIKeys = contextKey("apiKeys")
 
+	// ContextHttpSignatureAuth takes HttpSignatureAuth as authentication for the request.
+	ContextHttpSignatureAuth = contextKey("httpsignature")
+
 	// ContextServerIndex uses a server configuration from the index.
 	ContextServerIndex = contextKey("serverIndex")
 
@@ -100,10 +103,10 @@ func NewConfiguration() *Configuration {
 		UserAgent:        "OpenAPI-Generator/1.0.0/go",
 		Debug:            false,
 		Servers:          ServerConfigurations{
-		{
-			URL: "http://petstore.swagger.io:80/v2",
-			Description: "No description provided",
-		},
+			{
+				URL: "http://petstore.swagger.io:80/v2",
+				Description: "No description provided",
+			},
 		},
 		OperationServers: map[string]ServerConfigurations{
 		},

@@ -7,90 +7,77 @@
 
 import Foundation
 
-public typealias EncodeResult = (data: Data?, error: Error?)
-
 enum DateError: String, Error {
     case invalidDate
 }
 
-open class CodableHelper {
+{{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class CodableHelper {
 
-    public static var dateformatter: DateFormatter?
-
-    open class func decode<T>(_ type: T.Type, from data: Data) -> (decodableObj: T?, error: Error?) where T : Decodable {
-        var returnedDecodable: T? = nil
-        var returnedError: Error? = nil
-
+    private static var customDateFormatter: DateFormatter?
+    private static var defaultDateFormatter: DateFormatter = OpenISO8601DateFormatter()
+    private static var customJSONDecoder: JSONDecoder?
+    private static var defaultJSONDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
-        if let df = self.dateformatter {
-            decoder.dateDecodingStrategy = .formatted(df)
-        } else {
-            decoder.dataDecodingStrategy = .base64
-            decoder.dateDecodingStrategy = .custom({ (decoder) -> Date in
-                let container = try decoder.singleValueContainer()
-                let dateStr = try container.decode(String.self)
+        decoder.dateDecodingStrategy = .custom({ (decoder) -> Date in
+                                                       let container = try decoder.singleValueContainer()
+                                                       let dateStr = try container.decode(String.self)
 
-                let formatters = [
-                    "yyyy-MM-dd",
-                    "yyyy-MM-dd'T'HH:mm:ssZZZZZ",
-                    "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ",
-                    "yyyy-MM-dd'T'HH:mm:ss'Z'",
-                    "yyyy-MM-dd'T'HH:mm:ss.SSS",
-                    "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-                    "yyyy-MM-dd HH:mm:ss"
-                    ].map { (format: String) -> DateFormatter in
-                        let formatter = DateFormatter()
-                        formatter.locale = Locale(identifier: "en_US_POSIX")
-                        formatter.dateFormat = format
-                        return formatter
-                }
+                                                       let formatters = [
+                                                           "yyyy-MM-dd",
+                                                           "yyyy-MM-dd'T'HH:mm:ssZZZZZ",
+                                                           "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ",
+                                                           "yyyy-MM-dd'T'HH:mm:ss'Z'",
+                                                           "yyyy-MM-dd'T'HH:mm:ss.SSS",
+                                                           "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+                                                           "yyyy-MM-dd HH:mm:ss"
+                                                           ].map { (format: String) -> DateFormatter in
+                                                               let formatter = DateFormatter()
+                                                               formatter.locale = Locale(identifier: "en_US_POSIX")
+                                                               formatter.dateFormat = format
+                                                               return formatter
+                                                       }
 
-                for formatter in formatters {
-                    if let date = formatter.date(from: dateStr) {
-                        return date
-                    }
-                }
+                                                       for formatter in formatters {
+                                                           if let date = formatter.date(from: dateStr) {
+                                                               return date
+                                                           }
+                                                       }
 
-                throw DateError.invalidDate
-            })
-        }
+                                                       throw DateError.invalidDate
+                                                   })
+        return decoder
+    }()
+    private static var customJSONEncoder: JSONEncoder?
+    private static var defaultJSONEncoder: JSONEncoder = {
+       let encoder = JSONEncoder()
+       let formatter = DateFormatter()
+       formatter.calendar = Calendar(identifier: .iso8601)
+       formatter.locale = Locale(identifier: "en_US_POSIX")
+       formatter.timeZone = TimeZone(secondsFromGMT: 0)
+       formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+        encoder.dateEncodingStrategy = .formatted(formatter)
+        encoder.outputFormatting = .prettyPrinted
+        return encoder
+    }()
 
-        do {
-            returnedDecodable = try decoder.decode(type, from: data)
-        } catch {
-            returnedError = error
-        }
-
-        return (returnedDecodable, returnedError)
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} static var dateFormatter: DateFormatter {
+        get { return self.customDateFormatter ?? self.defaultDateFormatter }
+        set { self.customDateFormatter = newValue }
+    }
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} static var jsonDecoder: JSONDecoder {
+        get { return self.customJSONDecoder ?? self.defaultJSONDecoder }
+        set { self.customJSONDecoder = newValue }
+    }
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}public{{/nonPublicApi}} static var jsonEncoder: JSONEncoder {
+        get { return self.customJSONEncoder ?? self.defaultJSONEncoder }
+        set { self.customJSONEncoder = newValue }
     }
 
-    open class func encode<T>(_ value: T, prettyPrint: Bool = false) -> EncodeResult where T : Encodable {
-        var returnedData: Data?
-        var returnedError: Error? = nil
-
-        let encoder = JSONEncoder()
-        if prettyPrint {
-            encoder.outputFormatting = .prettyPrinted
-        }
-        if let df = self.dateformatter {
-            encoder.dateEncodingStrategy = .formatted(df)
-        } else {
-            encoder.dataEncodingStrategy = .base64
-            let formatter = DateFormatter()
-            formatter.calendar = Calendar(identifier: .iso8601)
-            formatter.locale = Locale(identifier: "en_US_POSIX")
-            formatter.timeZone = TimeZone(secondsFromGMT: 0)
-            formatter.dateFormat = Configuration.dateFormat
-            encoder.dateEncodingStrategy = .formatted(formatter)
-        }
-
-        do {
-            returnedData = try encoder.encode(value)
-        } catch {
-            returnedError = error
-        }
-
-        return (returnedData, returnedError)
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func decode<T>(_ type: T.Type, from data: Data) -> Result<T, Error> where T: Decodable {
+        return Result { try self.jsonDecoder.decode(type, from: data) }
     }
 
+    {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func encode<T>(_ value: T) -> Result<Data, Error> where T: Encodable {
+        return Result { try self.jsonEncoder.encode(value) }
+    }
 }

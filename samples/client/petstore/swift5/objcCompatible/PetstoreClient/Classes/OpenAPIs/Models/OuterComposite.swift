@@ -7,11 +7,16 @@
 
 import Foundation
 
-public struct OuterComposite: Codable {
+@objc public class OuterComposite: NSObject, Codable {
 
     public var myNumber: Double?
     public var myString: String?
     public var myBoolean: Bool?
+    public var myBooleanNum: NSNumber? {
+        get {
+            return myBoolean as NSNumber?
+        }
+    }
 
     public init(myNumber: Double?, myString: String?, myBoolean: Bool?) {
         self.myNumber = myNumber
@@ -19,7 +24,7 @@ public struct OuterComposite: Codable {
         self.myBoolean = myBoolean
     }
 
-    public enum CodingKeys: String, CodingKey {
+    public enum CodingKeys: String, CodingKey, CaseIterable {
         case myNumber = "my_number"
         case myString = "my_string"
         case myBoolean = "my_boolean"

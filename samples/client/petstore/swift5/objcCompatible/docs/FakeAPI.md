@@ -4,7 +4,6 @@ All URIs are relative to *http://petstore.swagger.io:80/v2*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createXmlItem**](FakeAPI.md#createxmlitem) | **POST** /fake/create_xml_item | creates an XmlItem
 [**fakeOuterBooleanSerialize**](FakeAPI.md#fakeouterbooleanserialize) | **POST** /fake/outer/boolean | 
 [**fakeOuterCompositeSerialize**](FakeAPI.md#fakeoutercompositeserialize) | **POST** /fake/outer/composite | 
 [**fakeOuterNumberSerialize**](FakeAPI.md#fakeouternumberserialize) | **POST** /fake/outer/number | 
@@ -12,63 +11,12 @@ Method | HTTP request | Description
 [**testBodyWithFileSchema**](FakeAPI.md#testbodywithfileschema) | **PUT** /fake/body-with-file-schema | 
 [**testBodyWithQueryParams**](FakeAPI.md#testbodywithqueryparams) | **PUT** /fake/body-with-query-params | 
 [**testClientModel**](FakeAPI.md#testclientmodel) | **PATCH** /fake | To test \&quot;client\&quot; model
-[**testEndpointParameters**](FakeAPI.md#testendpointparameters) | **POST** /fake | Fake endpoint for testing various parameters 假端點 偽のエンドポイント 가짜 엔드 포인트 
+[**testEndpointParameters**](FakeAPI.md#testendpointparameters) | **POST** /fake | Fake endpoint for testing various parameters  假端點  偽のエンドポイント  가짜 엔드 포인트
 [**testEnumParameters**](FakeAPI.md#testenumparameters) | **GET** /fake | To test enum parameters
 [**testGroupParameters**](FakeAPI.md#testgroupparameters) | **DELETE** /fake | Fake endpoint to test group parameters (optional)
 [**testInlineAdditionalProperties**](FakeAPI.md#testinlineadditionalproperties) | **POST** /fake/inline-additionalProperties | test inline additionalProperties
 [**testJsonFormData**](FakeAPI.md#testjsonformdata) | **GET** /fake/jsonFormData | test json serialization of form data
-[**testQueryParameterCollectionFormat**](FakeAPI.md#testqueryparametercollectionformat) | **PUT** /fake/test-query-paramters | 
 
-
-# **createXmlItem**
-```swift
-    open class func createXmlItem(xmlItem: XmlItem, completion: @escaping (_ data: Void?, _ error: Error?) -> Void)
-```
-
-creates an XmlItem
-
-this route creates an XmlItem
-
-### Example 
-```swift
-// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import PetstoreClient
-
-let xmlItem = XmlItem(attributeString: "attributeString_example", attributeNumber: 123, attributeInteger: 123, attributeBoolean: false, wrappedArray: [123], nameString: "nameString_example", nameNumber: 123, nameInteger: 123, nameBoolean: false, nameArray: [123], nameWrappedArray: [123], prefixString: "prefixString_example", prefixNumber: 123, prefixInteger: 123, prefixBoolean: false, prefixArray: [123], prefixWrappedArray: [123], namespaceString: "namespaceString_example", namespaceNumber: 123, namespaceInteger: 123, namespaceBoolean: false, namespaceArray: [123], namespaceWrappedArray: [123], prefixNsString: "prefixNsString_example", prefixNsNumber: 123, prefixNsInteger: 123, prefixNsBoolean: false, prefixNsArray: [123], prefixNsWrappedArray: [123]) // XmlItem | XmlItem Body
-
-// creates an XmlItem
-FakeAPI.createXmlItem(xmlItem: xmlItem) { (response, error) in
-    guard error == nil else {
-        print(error)
-        return
-    }
-
-    if (response) {
-        dump(response)
-    }
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **xmlItem** | [**XmlItem**](XmlItem.md) | XmlItem Body | 
-
-### Return type
-
-Void (empty response body)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: application/xml, application/xml; charset=utf-8, application/xml; charset=utf-16, text/xml, text/xml; charset=utf-8, text/xml; charset=utf-16
- - **Accept**: Not defined
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **fakeOuterBooleanSerialize**
 ```swift
@@ -84,7 +32,7 @@ Test serialization of outer boolean types
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import PetstoreClient
 
-let body = false // Bool | Input boolean as post body (optional)
+let body = true // Bool | Input boolean as post body (optional)
 
 FakeAPI.fakeOuterBooleanSerialize(body: body) { (response, error) in
     guard error == nil else {
@@ -419,9 +367,9 @@ No authorization required
     open class func testEndpointParameters(number: Double, double: Double, patternWithoutDelimiter: String, byte: Data, integer: Int? = nil, int32: Int? = nil, int64: Int64? = nil, float: Float? = nil, string: String? = nil, binary: URL? = nil, date: Date? = nil, dateTime: Date? = nil, password: String? = nil, callback: String? = nil, completion: @escaping (_ data: Void?, _ error: Error?) -> Void)
 ```
 
-Fake endpoint for testing various parameters 假端點 偽のエンドポイント 가짜 엔드 포인트 
+Fake endpoint for testing various parameters  假端點  偽のエンドポイント  가짜 엔드 포인트
 
-Fake endpoint for testing various parameters 假端點 偽のエンドポイント 가짜 엔드 포인트 
+Fake endpoint for testing various parameters  假端點  偽のエンドポイント  가짜 엔드 포인트
 
 ### Example 
 ```swift
@@ -443,7 +391,7 @@ let dateTime = Date() // Date | None (optional)
 let password = "password_example" // String | None (optional)
 let callback = "callback_example" // String | None (optional)
 
-// Fake endpoint for testing various parameters 假端點 偽のエンドポイント 가짜 엔드 포인트 
+// Fake endpoint for testing various parameters  假端點  偽のエンドポイント  가짜 엔드 포인트
 FakeAPI.testEndpointParameters(number: number, double: double, patternWithoutDelimiter: patternWithoutDelimiter, byte: byte, integer: integer, int32: int32, int64: int64, float: float, string: string, binary: binary, date: date, dateTime: dateTime, password: password, callback: callback) { (response, error) in
     guard error == nil else {
         print(error)
@@ -505,13 +453,13 @@ To test enum parameters
 import PetstoreClient
 
 let enumHeaderStringArray = ["enumHeaderStringArray_example"] // [String] | Header parameter enum test (string array) (optional)
-let enumHeaderString = "enumHeaderString_example" // String | Header parameter enum test (string) (optional) (default to .-efg)
+let enumHeaderString = "enumHeaderString_example" // String | Header parameter enum test (string) (optional) (default to .efg)
 let enumQueryStringArray = ["enumQueryStringArray_example"] // [String] | Query parameter enum test (string array) (optional)
-let enumQueryString = "enumQueryString_example" // String | Query parameter enum test (string) (optional) (default to .-efg)
+let enumQueryString = "enumQueryString_example" // String | Query parameter enum test (string) (optional) (default to .efg)
 let enumQueryInteger = 987 // Int | Query parameter enum test (double) (optional)
 let enumQueryDouble = 987 // Double | Query parameter enum test (double) (optional)
-let enumFormStringArray = ["inner_example"] // [String] | Form parameter enum test (string array) (optional) (default to .$)
-let enumFormString = "enumFormString_example" // String | Form parameter enum test (string) (optional) (default to .-efg)
+let enumFormStringArray = ["inner_example"] // [String] | Form parameter enum test (string array) (optional) (default to .dollar)
+let enumFormString = "enumFormString_example" // String | Form parameter enum test (string) (optional) (default to .efg)
 
 // To test enum parameters
 FakeAPI.testEnumParameters(enumHeaderStringArray: enumHeaderStringArray, enumHeaderString: enumHeaderString, enumQueryStringArray: enumQueryStringArray, enumQueryString: enumQueryString, enumQueryInteger: enumQueryInteger, enumQueryDouble: enumQueryDouble, enumFormStringArray: enumFormStringArray, enumFormString: enumFormString) { (response, error) in
@@ -531,13 +479,13 @@ FakeAPI.testEnumParameters(enumHeaderStringArray: enumHeaderStringArray, enumHea
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **enumHeaderStringArray** | [**[String]**](String.md) | Header parameter enum test (string array) | [optional] 
- **enumHeaderString** | **String** | Header parameter enum test (string) | [optional] [default to .-efg]
+ **enumHeaderString** | **String** | Header parameter enum test (string) | [optional] [default to .efg]
  **enumQueryStringArray** | [**[String]**](String.md) | Query parameter enum test (string array) | [optional] 
- **enumQueryString** | **String** | Query parameter enum test (string) | [optional] [default to .-efg]
+ **enumQueryString** | **String** | Query parameter enum test (string) | [optional] [default to .efg]
  **enumQueryInteger** | **Int** | Query parameter enum test (double) | [optional] 
  **enumQueryDouble** | **Double** | Query parameter enum test (double) | [optional] 
- **enumFormStringArray** | [**[String]**](String.md) | Form parameter enum test (string array) | [optional] [default to .$]
- **enumFormString** | **String** | Form parameter enum test (string) | [optional] [default to .-efg]
+ **enumFormStringArray** | [**[String]**](String.md) | Form parameter enum test (string array) | [optional] [default to .dollar]
+ **enumFormString** | **String** | Form parameter enum test (string) | [optional] [default to .efg]
 
 ### Return type
 
@@ -569,10 +517,10 @@ Fake endpoint to test group parameters (optional)
 import PetstoreClient
 
 let requiredStringGroup = 987 // Int | Required String in group parameters
-let requiredBooleanGroup = false // Bool | Required Boolean in group parameters
+let requiredBooleanGroup = true // Bool | Required Boolean in group parameters
 let requiredInt64Group = 987 // Int64 | Required Integer in group parameters
 let stringGroup = 987 // Int | String in group parameters (optional)
-let booleanGroup = false // Bool | Boolean in group parameters (optional)
+let booleanGroup = true // Bool | Boolean in group parameters (optional)
 let int64Group = 987 // Int64 | Integer in group parameters (optional)
 
 // Fake endpoint to test group parameters (optional)
@@ -708,63 +656,6 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/x-www-form-urlencoded
- - **Accept**: Not defined
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **testQueryParameterCollectionFormat**
-```swift
-    open class func testQueryParameterCollectionFormat(pipe: [String], ioutil: [String], http: [String], url: [String], context: [String], completion: @escaping (_ data: Void?, _ error: Error?) -> Void)
-```
-
-
-
-To test the collection format in query parameters
-
-### Example 
-```swift
-// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import PetstoreClient
-
-let pipe = ["inner_example"] // [String] | 
-let ioutil = ["inner_example"] // [String] | 
-let http = ["inner_example"] // [String] | 
-let url = ["inner_example"] // [String] | 
-let context = ["inner_example"] // [String] | 
-
-FakeAPI.testQueryParameterCollectionFormat(pipe: pipe, ioutil: ioutil, http: http, url: url, context: context) { (response, error) in
-    guard error == nil else {
-        print(error)
-        return
-    }
-
-    if (response) {
-        dump(response)
-    }
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **pipe** | [**[String]**](String.md) |  | 
- **ioutil** | [**[String]**](String.md) |  | 
- **http** | [**[String]**](String.md) |  | 
- **url** | [**[String]**](String.md) |  | 
- **context** | [**[String]**](String.md) |  | 
-
-### Return type
-
-Void (empty response body)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
  - **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

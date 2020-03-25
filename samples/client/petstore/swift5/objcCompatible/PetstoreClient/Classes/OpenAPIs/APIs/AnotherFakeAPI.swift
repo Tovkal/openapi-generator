@@ -6,18 +6,23 @@
 //
 
 import Foundation
-import Alamofire
 
-open class AnotherFakeAPI {
+@objc open class AnotherFakeAPI: NSObject {
     /**
      To test special tags
      
      - parameter body: (body) client model 
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func call123testSpecialTags(body: Client, completion: @escaping ((_ data: Client?, _ error: Error?) -> Void)) {
-        call123testSpecialTagsWithRequestBuilder(body: body).execute { (response, error) -> Void in
-            completion(response?.body, error)
+    open class func call123testSpecialTags(body: Client, apiResponseQueue: DispatchQueue = PetstoreClientAPI.apiResponseQueue, completion: @escaping ((_ data: Client?, _ error: Error?) -> Void)) {
+        call123testSpecialTagsWithRequestBuilder(body: body).execute(apiResponseQueue) { result -> Void in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
         }
     }
 
