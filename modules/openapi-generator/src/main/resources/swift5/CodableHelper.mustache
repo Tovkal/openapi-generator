@@ -74,10 +74,65 @@ enum DateError: String, Error {
     }
 
     {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func decode<T>(_ type: T.Type, from data: Data) -> Result<T, Error> where T: Decodable {
-        return Result { try self.jsonDecoder.decode(type, from: data) }
+        return Result { try self.jsonDecoder.decode(type, from: data, allowFragments: true) }
     }
 
     {{#nonPublicApi}}internal{{/nonPublicApi}}{{^nonPublicApi}}open{{/nonPublicApi}} class func encode<T>(_ value: T) -> Result<Data, Error> where T: Encodable {
         return Result { try self.jsonEncoder.encode(value) }
+    }
+}
+
+{{#nonPublicApi}}internal {{/nonPublicApi}}extension CodingUserInfoKey {
+
+    static let fragmentBoxedType = CodingUserInfoKey(
+        rawValue: "CodingUserInfoKey.fragmentBoxedType"
+        )!
+}
+
+{{#nonPublicApi}}internal {{/nonPublicApi}}extension JSONDecoder {
+
+    {{#nonPublicApi}}private{{/nonPublicApi}} struct FragmentDecodingBox<T: Decodable>: Decodable {
+
+        var value: T
+
+        init(from decoder: Decoder) throws {
+            let type = decoder.userInfo[.fragmentBoxedType] as! T.Type
+            var container = try decoder.unkeyedContainer()
+            self.value = try container.decode(type)
+        }
+    }
+
+    {{#nonPublicApi}}private{{/nonPublicApi}} func copy() -> JSONDecoder {
+        let decoder = JSONDecoder()
+        decoder.dataDecodingStrategy = dataDecodingStrategy
+        decoder.dateDecodingStrategy = dateDecodingStrategy
+        decoder.keyDecodingStrategy = keyDecodingStrategy
+        decoder.nonConformingFloatDecodingStrategy = nonConformingFloatDecodingStrategy
+        decoder.userInfo = userInfo
+        return decoder
+    }
+
+    {{#nonPublicApi}}public{{/nonPublicApi}} func decode<T: Decodable>(
+        _ type: T.Type, from data: Data, allowFragments: Bool
+    ) throws -> T {
+        if let json = try? decode(type, from: data) {
+            return json
+        }
+
+        guard
+            (try? JSONSerialization.jsonObject(with: data)) == nil,
+            allowFragments
+        else {
+            return try decode(type, from: data)
+        }
+
+        let jsonObject = try JSONSerialization
+            .jsonObject(with: data, options: .allowFragments)
+        let boxedData = try JSONSerialization.data(withJSONObject: [jsonObject])
+
+        let decoder = copy()
+        decoder.userInfo[.fragmentBoxedType] = type
+
+        return try decoder.decode(FragmentDecodingBox<T>.self, from: boxedData).value
     }
 }
