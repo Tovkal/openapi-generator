@@ -232,7 +232,7 @@ extension {{projectName}}API {
             {{#queryParams}}
             {{> _param}}{{#hasMore}}, {{/hasMore}}
             {{/queryParams}}
-        ]{{#queryParams}}, separatorType:{{#collectionFormat}}{{#isCollectionFormatMulti}}.multi{{/isCollectionFormatMulti}}{{^isCollectionFormatMulti}}.csv{{/isCollectionFormatMulti}}{{/collectionFormat}}{{/queryParams}}){{/hasQueryParams}}{{^hasQueryParams}}
+        ]{{#queryParams}}{{#collectionFormat}}, separatorType:{{#isCollectionFormatMulti}}.multi{{/isCollectionFormatMulti}}{{^isCollectionFormatMulti}}.csv{{/isCollectionFormatMulti}}{{/collectionFormat}}{{/queryParams}}){{/hasQueryParams}}{{^hasQueryParams}}
         let url = URLComponents(string: URLString){{/hasQueryParams}}{{#headerParams}}{{^secondaryParam}}
         let nillableHeaders: [String: Any?] = [{{/secondaryParam}}
             {{> _param}}{{#hasMore}},{{/hasMore}}{{^hasMore}}
