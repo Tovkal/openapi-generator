@@ -7,7 +7,7 @@
 
 import Foundation
 
-@objc public class Tag: NSObject, Codable {
+@objc public class Tag: NSObject, Codable, Hashable {
 
     public var _id: Int64?
     public var _idNum: NSNumber? {
@@ -17,7 +17,7 @@ import Foundation
     }
     public var name: String?
 
-    public init(_id: Int64?, name: String?) {
+    public init(_id: Int64? = nil, name: String? = nil) {
         self._id = _id
         self.name = name
     }
