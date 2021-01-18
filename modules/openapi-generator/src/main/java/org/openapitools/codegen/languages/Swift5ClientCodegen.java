@@ -329,7 +329,8 @@ public class Swift5ClientCodegen extends DefaultCodegen implements CodegenConfig
     protected void addAdditionPropertiesToCodeGenModel(CodegenModel codegenModel,
                                                        Schema schema) {
 
-        final Schema additionalProperties = getAdditionalProperties(schema);
+        Schema additionalProperties = ModelUtils.getAdditionalProperties(schema);
+        additionalProperties = null; // Disable to avoid additional properties in resulting models
 
         if (additionalProperties != null) {
             codegenModel.additionalPropertiesType = getSchemaType(additionalProperties);
