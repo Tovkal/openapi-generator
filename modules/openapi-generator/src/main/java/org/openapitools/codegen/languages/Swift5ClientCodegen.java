@@ -775,6 +775,17 @@ public class Swift5ClientCodegen extends DefaultCodegen implements CodegenConfig
 
         return codegenModel;
     }
+    
+    @Override
+    public CodegenOperation fromOperation(String path, String httpMethod, Operation operation, List<Server> servers) {
+        CodegenOperation codegenOperation = super.fromOperation(path, httpMethod, operation, servers);
+
+        if (codegenOperation.returnType != null && codegenOperation.returnType.equals("Any")) {
+            codegenOperation.returnType = null;
+        }
+
+        return codegenOperation;
+    }
 
     public void setProjectName(String projectName) {
         this.projectName = projectName;
