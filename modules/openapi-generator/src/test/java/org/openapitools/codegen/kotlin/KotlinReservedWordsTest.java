@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import java.util.HashSet;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 @SuppressWarnings("rawtypes")
 public class KotlinReservedWordsTest {
@@ -21,34 +22,69 @@ public class KotlinReservedWordsTest {
     @DataProvider(name = "reservedWords")
     static Object[][] reservedWords() {
         return new Object[][]{
-                {"as"},
-                {"break"},
-                {"class"},
-                {"continue"},
-                {"do"},
-                {"else"},
-                {"false"},
-                {"for"},
-                {"fun"},
-                {"if"},
-                {"in"},
-                {"interface"},
-                {"is"},
-                {"null"},
-                {"object"},
-                {"package"},
-                {"return"},
-                {"super"},
-                {"this"},
-                {"throw"},
-                {"true"},
-                {"try"},
-                {"typealias"},
-                {"typeof"},
-                {"val"},
-                {"var"},
-                {"when"},
-                {"while"}
+               {"abstract"},
+               {"annotation"},
+               {"as"},
+               {"break"},
+               {"case"},
+               {"catch"},
+               {"class"},
+               {"companion"},
+               {"const"},
+               {"constructor"},
+               {"continue"},
+               {"crossinline"},
+               {"data"},
+               {"delegate"},
+               {"do"},
+               {"else"},
+               {"enum"},
+               {"external"},
+               {"false"},
+               {"final"},
+               {"finally"},
+               {"for"},
+               {"fun"},
+               {"if"},
+               {"in"},
+               {"infix"},
+               {"init"},
+               {"inline"},
+               {"inner"},
+               {"interface"},
+               {"internal"},
+               {"is"},
+               {"it"},
+               {"lateinit"},
+               {"lazy"},
+               {"noinline"},
+               {"null"},
+               {"object"},
+               {"open"},
+               {"operator"},
+               {"out"},
+               {"override"},
+               {"package"},
+               {"private"},
+               {"protected"},
+               {"public"},
+               {"reified"},
+               {"return"},
+               {"sealed"},
+               {"super"},
+               {"suspend"},
+               {"tailrec"},
+               {"this"},
+               {"throw"},
+               {"true"},
+               {"try"},
+               {"typealias"},
+               {"typeof"},
+               {"val"},
+               {"var"},
+               {"vararg"},
+               {"when"},
+               {"while"}
         };
     }
 
@@ -104,10 +140,10 @@ public class KotlinReservedWordsTest {
         CodegenProperty property = codegen.fromProperty(reservedWord, (Schema) linked.getProperties().get(reservedWord));
 
         if ("object".equals(reservedWord)) {
-            assertEquals(property.complexType, "kotlin.Any");
-            assertEquals(property.dataType, "kotlin.Any");
-            assertEquals(property.datatypeWithEnum, "kotlin.Any");
-            assertEquals(property.baseType, "kotlin.Any");
+            assertTrue(property.isPrimitiveType);
+            assertEquals(property.dataType, "Any");
+            assertEquals(property.datatypeWithEnum, "Any");
+            assertEquals(property.baseType, "Any");
         } else {
             assertEquals(property.complexType, titleCased);
             assertEquals(property.dataType, titleCased);

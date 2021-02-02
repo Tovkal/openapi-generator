@@ -8,6 +8,14 @@ paths:
       summary: Ping
       description: Pingy Ping
       parameters:
+        - name: abstract
+          in: header
+          schema:
+            type: string
+        - name: annotation
+          in: header
+          schema:
+            type: string
         - name: as
           in: header
           schema:
@@ -16,11 +24,43 @@ paths:
           in: header
           schema:
             type: string
+        - name: case
+          in: header
+          schema:
+            type: string
+        - name: catch
+          in: header
+          schema:
+            type: string
         - name: class
           in: header
           schema:
             type: string
+        - name: companion
+          in: header
+          schema:
+            type: string
+        - name: const
+          in: header
+          schema:
+            type: string
+        - name: constructor
+          in: header
+          schema:
+            type: string
         - name: continue
+          in: header
+          schema:
+            type: string
+        - name: crossinline
+          in: header
+          schema:
+            type: string
+        - name: data
+          in: header
+          schema:
+            type: string
+        - name: delegate
           in: header
           schema:
             type: string
@@ -32,7 +72,23 @@ paths:
           in: header
           schema:
             type: string
+        - name: enum
+          in: header
+          schema:
+            type: string
+        - name: external
+          in: header
+          schema:
+            type: string
         - name: "false"
+          in: header
+          schema:
+            type: string
+        - name: final
+          in: header
+          schema:
+            type: string
+        - name: finally
           in: header
           schema:
             type: string
@@ -52,11 +108,47 @@ paths:
           in: header
           schema:
             type: string
+        - name: infix
+          in: header
+          schema:
+            type: string
+        - name: init
+          in: header
+          schema:
+            type: string
+        - name: inline
+          in: header
+          schema:
+            type: string
+        - name: inner
+          in: header
+          schema:
+            type: string
         - name: interface
           in: header
           schema:
             type: string
+        - name: internal
+          in: header
+          schema:
+            type: string
         - name: is
+          in: header
+          schema:
+            type: string
+        - name: it
+          in: header
+          schema:
+            type: string
+        - name: lateinit
+          in: header
+          schema:
+            type: string
+        - name: lazy
+          in: header
+          schema:
+            type: string
+        - name: noinline
           in: header
           schema:
             type: string
@@ -68,7 +160,39 @@ paths:
           in: header
           schema:
             type: string
+        - name: open
+          in: header
+          schema:
+            type: string
+        - name: operator
+          in: header
+          schema:
+            type: string
+        - name: out
+          in: header
+          schema:
+            type: string
+        - name: override
+          in: header
+          schema:
+            type: string
         - name: package
+          in: header
+          schema:
+            type: string
+        - name: private
+          in: header
+          schema:
+            type: string
+        - name: protected
+          in: header
+          schema:
+            type: string
+        - name: public
+          in: header
+          schema:
+            type: string
+        - name: reified
           in: header
           schema:
             type: string
@@ -76,7 +200,19 @@ paths:
           in: header
           schema:
             type: string
+        - name: sealed
+          in: header
+          schema:
+            type: string
         - name: super
+          in: header
+          schema:
+            type: string
+        - name: suspend
+          in: header
+          schema:
+            type: string
+        - name: tailrec
           in: header
           schema:
             type: string
@@ -112,6 +248,10 @@ paths:
           in: header
           schema:
             type: string
+        - name: vararg
+          in: header
+          schema:
+            type: string
         - name: when
           in: header
           schema:
@@ -130,19 +270,47 @@ components:
       description: OK, Good
       type: object
       properties:
+        abstract:
+          type: string
+        annotation:
+          type: string
         as:
           type: string
         break:
           type: string
+        case:
+          type: string
+        catch:
+          type: string
         class:
           type: string
+        companion:
+          type: string
+        const:
+          type: string
+        constructor:
+          type: string
         continue:
+          type: string
+        crossinline:
+          type: string
+        data:
+          type: string
+        delegate:
           type: string
         do:
           type: string
         else:
           type: string
+        enum:
+          type: string
+        external:
+          type: string
         false:
+          type: string
+        final:
+          type: string
+        finally:
           type: string
         for:
           type: string
@@ -152,19 +320,59 @@ components:
           type: string
         in:
           type: string
+        infix:
+          type: string
+        init:
+          type: string
+        inline:
+          type: string
+        inner:
+          type: string
         interface:
           type: string
+        internal:
+          type: string
         is:
+          type: string
+        it:
+          type: string
+        lateinit:
+          type: string
+        lazy:
+          type: string
+        noinline:
           type: string
         null:
           type: string
         object:
           type: string
+        open:
+          type: string
+        operator:
+          type: string
+        out:
+          type: string
+        override:
+          type: string
         package:
+          type: string
+        private:
+          type: string
+        protected:
+          type: string
+        public:
+          type: string
+        reified:
           type: string
         return:
           type: string
+        sealed:
+          type: string
         super:
+          type: string
+        suspend:
+          type: string
+        tailrec:
           type: string
         this:
           type: string
@@ -182,6 +390,8 @@ components:
           type: string
         var:
           type: string
+        vararg:
+          type: string
         when:
           type: string
         while:
@@ -193,20 +403,48 @@ components:
       description: Refernce links
       type: object
       properties:
+        abstract:
+          $ref: '#/components/schemas/abstract'
+        annotation:
+          $ref: '#/components/schemas/annotation'
         as:
           $ref: '#/components/schemas/as'
         break:
           $ref: '#/components/schemas/break'
+        case:
+          $ref: '#/components/schemas/case'
+        catch:
+          $ref: '#/components/schemas/catch'
         class:
           $ref: '#/components/schemas/class'
+        companion:
+          $ref: '#/components/schemas/companion'
+        const:
+          $ref: '#/components/schemas/const'
+        constructor:
+          $ref: '#/components/schemas/constructor'
         continue:
           $ref: '#/components/schemas/continue'
+        crossinline:
+          $ref: '#/components/schemas/crossinline'
+        data:
+          $ref: '#/components/schemas/data'
+        delegate:
+          $ref: '#/components/schemas/delegate'
         do:
           $ref: '#/components/schemas/do'
         else:
           $ref: '#/components/schemas/else'
+        enum:
+          $ref: '#/components/schemas/enum'
+        external:
+          $ref: '#/components/schemas/external'
         false:
           $ref: '#/components/schemas/false'
+        final:
+          $ref: '#/components/schemas/final'
+        finally:
+          $ref: '#/components/schemas/finally'
         for:
           $ref: '#/components/schemas/for'
         fun:
@@ -215,20 +453,60 @@ components:
           $ref: '#/components/schemas/if'
         in:
           $ref: '#/components/schemas/in'
+        infix:
+          $ref: '#/components/schemas/infix'
+        init:
+          $ref: '#/components/schemas/init'
+        inline:
+          $ref: '#/components/schemas/inline'
+        inner:
+          $ref: '#/components/schemas/inner'
         interface:
           $ref: '#/components/schemas/interface'
+        internal:
+          $ref: '#/components/schemas/internal'
         is:
           $ref: '#/components/schemas/is'
+        it:
+          $ref: '#/components/schemas/it'
+        lateinit:
+          $ref: '#/components/schemas/lateinit'
+        lazy:
+          $ref: '#/components/schemas/lazy'
+        noinline:
+          $ref: '#/components/schemas/noinline'
         null:
           $ref: '#/components/schemas/null'
         object:
           $ref: '#/components/schemas/object'
+        open:
+          $ref: '#/components/schemas/open'
+        operator:
+          $ref: '#/components/schemas/operator'
+        out:
+          $ref: '#/components/schemas/out'
+        override:
+          $ref: '#/components/schemas/override'
         package:
           $ref: '#/components/schemas/package'
+        private:
+          $ref: '#/components/schemas/private'
+        protected:
+          $ref: '#/components/schemas/protected'
+        public:
+          $ref: '#/components/schemas/public'
+        reified:
+          $ref: '#/components/schemas/reified'
         return:
           $ref: '#/components/schemas/return'
+        sealed:
+          $ref: '#/components/schemas/sealed'
         super:
           $ref: '#/components/schemas/super'
+        suspend:
+          $ref: '#/components/schemas/suspend'
+        tailrec:
+          $ref: '#/components/schemas/tailrec'
         this:
           $ref: '#/components/schemas/this'
         throw:
@@ -245,11 +523,29 @@ components:
           $ref: '#/components/schemas/val'
         var:
           $ref: '#/components/schemas/var'
+        vararg:
+          $ref: '#/components/schemas/vararg'
         when:
           $ref: '#/components/schemas/when'
         while:
           $ref: '#/components/schemas/while'
 
+    abstract:
+      title: Testing reserved word 'abstract'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    
+    annotation:
+      title: Testing reserved word 'anotatin'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    
     as:
       title: Testing reserved word 'as'
       type: object
@@ -266,8 +562,48 @@ components:
           type: integer
           format: int64
 
+    case:
+      title: Testing reserved word 'case'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    catch:
+      title: Testing reserved word 'catch'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
     class:
       title: Testing reserved word 'class'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    
+    companion:
+      title: Testing reserved word 'companion'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    const:
+      title: Testing reserved word 'const'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    constructor:
+      title: Testing reserved word 'constructor'
       type: object
       properties:
         id:
@@ -276,6 +612,30 @@ components:
 
     continue:
       title: Testing reserved word 'continue'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    
+    crossinline:
+      title: Testing reserved word 'crossinline'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    data:
+      title: Testing reserved word 'data'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    delegate:
+      title: Testing reserved word 'delegate'
       type: object
       properties:
         id:
@@ -298,8 +658,40 @@ components:
           type: integer
           format: int64
 
+    enum:
+      title: Testing reserved word 'enum'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    external:
+      title: Testing reserved word 'external'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
     false:
       title: Testing reserved word 'false'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    final:
+      title: Testing reserved word 'final'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    finally:
+      title: Testing reserved word 'finally'
       type: object
       properties:
         id:
@@ -338,8 +730,48 @@ components:
           type: integer
           format: int64
 
+    infix:
+      title: Testing reserved word 'infix'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    init:
+      title: Testing reserved word 'init'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    inline:
+      title: Testing reserved word 'inline'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    inner:
+      title: Testing reserved word 'inner'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
     interface:
       title: Testing reserved word 'interface'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    
+    internal:
+      title: Testing reserved word 'internal'
       type: object
       properties:
         id:
@@ -354,6 +786,38 @@ components:
           type: integer
           format: int64
 
+    it:
+      title: Testing reserved word 'it'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    lateinit:
+      title: Testing reserved word 'lateinit'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    lazy:
+      title: Testing reserved word 'lazy'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    noinline:
+      title: Testing reserved word 'noinline'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+  
     null:
       title: Testing reserved word 'null'
       type: object
@@ -370,8 +834,72 @@ components:
           type: integer
           format: int64
 
+    open:
+      title: Testing reserved word 'open'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    operator:
+      title: Testing reserved word 'operator'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    out:
+      title: Testing reserved word 'out'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    override:
+      title: Testing reserved word 'override'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
     package:
       title: Testing reserved word 'package'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    private:
+      title: Testing reserved word 'private'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    protected:
+      title: Testing reserved word 'protected'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    public:
+      title: Testing reserved word 'public'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    reified:
+      title: Testing reserved word 'reified'
       type: object
       properties:
         id:
@@ -386,8 +914,32 @@ components:
           type: integer
           format: int64
 
+    sealed:
+      title: Testing reserved word 'sealed'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
     super:
       title: Testing reserved word 'super'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    suspend:
+      title: Testing reserved word 'suspend'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    tailrec:
+      title: Testing reserved word 'tailrec'
       type: object
       properties:
         id:
@@ -452,6 +1004,14 @@ components:
 
     var:
       title: Testing reserved word 'var'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    vararg:
+      title: Testing reserved word 'vararg'
       type: object
       properties:
         id:

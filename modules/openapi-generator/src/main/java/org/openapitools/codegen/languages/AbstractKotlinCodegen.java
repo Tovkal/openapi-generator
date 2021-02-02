@@ -78,43 +78,78 @@ public abstract class AbstractKotlinCodegen extends DefaultCodegen implements Co
         setSortModelPropertiesByRequiredFlag(true);
 
         languageSpecificPrimitives = new HashSet<String>(Arrays.asList(
-                "kotlin.Byte",
-                "kotlin.ByteArray",
-                "kotlin.Short",
-                "kotlin.Int",
-                "kotlin.Long",
-                "kotlin.Float",
-                "kotlin.Double",
-                "kotlin.Boolean",
-                "kotlin.Char",
-                "kotlin.String",
-                "kotlin.Array",
-                "kotlin.collections.List",
-                "kotlin.collections.Map",
-                "kotlin.collections.Set"
+                "Unit",
+                "Any",
+                "Byte",
+                "ByteArray",
+                "Short",
+                "Int",
+                "Long",
+                "Float",
+                "Double",
+                "Boolean",
+                "Char",
+                "String",
+                "Array",
+                "List",
+                "Map",
+                "Set"
         ));
 
-        // this includes hard reserved words defined by https://github.com/JetBrains/kotlin/blob/master/core/descriptors/src/org/jetbrains/kotlin/renderer/KeywordStringsGenerated.java
-        // as well as keywords from https://kotlinlang.org/docs/reference/keyword-reference.html
+        // Keywords from https://kotlinlang.org/docs/reference/keyword-reference.html
         reservedWords = new HashSet<String>(Arrays.asList(
+                "abstract",
+                "annotation",
                 "as",
                 "break",
+                "case",
+                "catch",
                 "class",
+                "companion",
+                "const",
+                "constructor",
                 "continue",
+                "crossinline",
+                "data",
+                "delegate",
                 "do",
                 "else",
+                "enum",
+                "external",
                 "false",
+                "final",
+                "finally",
                 "for",
                 "fun",
                 "if",
                 "in",
+                "infix",
+                "init",
+                "inline",
+                "inner",
                 "interface",
+                "internal",
                 "is",
+                "it",
+                "lateinit",
+                "lazy",
+                "noinline",
                 "null",
                 "object",
+                "open",
+                "operator",
+                "out",
+                "override",
                 "package",
+                "private",
+                "protected",
+                "public",
+                "reified",
                 "return",
+                "sealed",
                 "super",
+                "suspend",
+                "tailrec",
                 "this",
                 "throw",
                 "true",
@@ -123,51 +158,56 @@ public abstract class AbstractKotlinCodegen extends DefaultCodegen implements Co
                 "typeof",
                 "val",
                 "var",
+                "vararg",
                 "when",
                 "while"
         ));
 
         defaultIncludes = new HashSet<String>(Arrays.asList(
-                "kotlin.Byte",
-                "kotlin.ByteArray",
-                "kotlin.Short",
-                "kotlin.Int",
-                "kotlin.Long",
-                "kotlin.Float",
-                "kotlin.Double",
-                "kotlin.Boolean",
-                "kotlin.Char",
-                "kotlin.Array",
-                "kotlin.collections.List",
-                "kotlin.collections.Set",
-                "kotlin.collections.Map"
+                "Unit",
+                "Any",
+                "Byte",
+                "ByteArray",
+                "Short",
+                "Int",
+                "Long",
+                "Float",
+                "Double",
+                "Boolean",
+                "Char",
+                "Array",
+                "List",
+                "Set",
+                "Map"
         ));
 
         typeMapping = new HashMap<String, String>();
-        typeMapping.put("string", "kotlin.String");
-        typeMapping.put("boolean", "kotlin.Boolean");
-        typeMapping.put("integer", "kotlin.Int");
-        typeMapping.put("float", "kotlin.Float");
-        typeMapping.put("long", "kotlin.Long");
-        typeMapping.put("double", "kotlin.Double");
-        typeMapping.put("ByteArray", "kotlin.ByteArray");
+        typeMapping.put("string", "String");
+        typeMapping.put("boolean", "Boolean");
+        typeMapping.put("integer", "Int");
+        typeMapping.put("float", "Float");
+        typeMapping.put("long", "Long");
+        typeMapping.put("double", "Double");
+        typeMapping.put("ByteArray", "ByteArray");
         typeMapping.put("number", "java.math.BigDecimal");
         typeMapping.put("decimal", "java.math.BigDecimal");
         typeMapping.put("date-time", "java.time.LocalDateTime");
         typeMapping.put("date", "java.time.LocalDate");
         typeMapping.put("file", "java.io.File");
-        typeMapping.put("array", "kotlin.Array");
-        typeMapping.put("list", "kotlin.collections.List");
-        typeMapping.put("set", "kotlin.collections.Set");
-        typeMapping.put("map", "kotlin.collections.Map");
-        typeMapping.put("object", "kotlin.Any");
-        typeMapping.put("binary", "kotlin.ByteArray");
+        typeMapping.put("array", "Array");
+        typeMapping.put("list", "List");
+        typeMapping.put("set", "Set");
+        typeMapping.put("map", "Map");
+        typeMapping.put("object", "Any");
+        typeMapping.put("AnyType", "Any");
+        typeMapping.put("void", "Unit");
+        typeMapping.put("binary", "ByteArray");
         typeMapping.put("Date", "java.time.LocalDate");
         typeMapping.put("DateTime", "java.time.LocalDateTime");
 
-        instantiationTypes.put("array", "kotlin.collections.ArrayList");
-        instantiationTypes.put("list", "kotlin.collections.ArrayList");
-        instantiationTypes.put("map", "kotlin.collections.HashMap");
+        instantiationTypes.put("array", "ArrayList");
+        instantiationTypes.put("list", "ArrayList");
+        instantiationTypes.put("map", "HashMap");
 
         importMapping = new HashMap<String, String>();
         importMapping.put("BigDecimal", "java.math.BigDecimal");
@@ -324,7 +364,7 @@ public abstract class AbstractKotlinCodegen extends DefaultCodegen implements Co
                 inner = new StringSchema().description("TODO default missing map inner type to string");
                 p.setAdditionalProperties(inner);
             }
-            return getSchemaType(target) + "<kotlin.String, " + getTypeDeclaration(inner) + ">";
+            return getSchemaType(target) + "<String, " + getTypeDeclaration(inner) + ">";
         }
         return super.getTypeDeclaration(target);
     }
@@ -781,15 +821,15 @@ public abstract class AbstractKotlinCodegen extends DefaultCodegen implements Co
 
     @Override
     public String toEnumValue(String value, String datatype) {
-        if ("kotlin.Int".equals(datatype) || "kotlin.Long".equals(datatype)) {
+        if ("Int".equals(datatype) || "Long".equals(datatype)) {
             return value;
-        } else if ("kotlin.Double".equals(datatype)) {
+        } else if ("Double".equals(datatype)) {
             if (value.contains(".")) {
                 return value;
             } else {
                 return value + ".0"; // Float and double must have .0
             }
-        } else if ("kotlin.Float".equals(datatype)) {
+        } else if ("Float".equals(datatype)) {
             return value + "f";
         } else {
             return "\"" + escapeText(value) + "\"";
@@ -798,7 +838,7 @@ public abstract class AbstractKotlinCodegen extends DefaultCodegen implements Co
 
     @Override
     public boolean isDataTypeString(final String dataType) {
-        return "String".equals(dataType) || "kotlin.String".equals(dataType);
+        return "String".equals(dataType);
     }
 
     @Override
